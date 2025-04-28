@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ランチメニュー一覧</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>登録済みランチメニュー一覧</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>メニュー名</th>
+                <th>価格</th>
+                <th>カテゴリー</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="menu : ${lunchList}">
+                <td th:text="${menu.menuName}">メニュー名</td>
+                <td th:text="${menu.cost}">価格</td>
+                <td th:text="${menu.menuCategory}">カテゴリー</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/lunchRegist}">新規登録はこちら</a>
+</body>
+</html>

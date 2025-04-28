@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ランチメニュー管理アプリ ホーム</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}" />
+</head>
+<body>
+    <h1>ようこそ、ランチメニュー管理アプリへ！</h1>
+
+    <div class="button-container">
+        <a th:href="@{/lunchRegist}" class="btn">ランチ登録</a>
+        <a th:href="@{/recommend}" class="btn">おすすめを見る</a>
+        <a th:href="@{/profile}" class="btn">プロフィール</a>
+    </div>
+</body>
+</html>
