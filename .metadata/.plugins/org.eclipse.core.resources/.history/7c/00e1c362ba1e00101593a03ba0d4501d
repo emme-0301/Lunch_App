@@ -1,0 +1,41 @@
+package com.example.demo;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.lunchapp.Login.userLoginForm;
+
+@Service
+public class userService {
+
+	@Autowired
+	UsersRepository repo;
+	
+	
+	public String create(userRegistForm form) {
+		
+		
+        Users users = new Users();
+        users.setUserName(form.getUserName());
+        users.setAge(form.getAge());
+        users.setEmail(form.getEmail());
+        users.setPassword(form.getPassword());
+        
+        
+        repo.save(users);
+        
+        return "success!!";
+    }
+	
+	public List<Users> login(userLoginForm form) {
+		
+		String email = form.getEmail();
+		String pass =  form.getPassword();
+		
+		List<Users> result= repo.findByemailAndPassword(email,pass);
+		
+		return result;
+	}
+	
+}

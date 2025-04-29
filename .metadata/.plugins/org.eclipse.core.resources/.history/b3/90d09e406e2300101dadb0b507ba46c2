@@ -1,0 +1,27 @@
+package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Controller
+public class BudgetController {
+
+    @Autowired
+    private BudgetService budgetService;
+
+    @GetMapping("/budget/input")
+    public String showBudgetInputForm(Model model) {
+        model.addAttribute("budgetForm", new BudgetForm());
+        return "budgetInput";
+    }
+
+    @PostMapping("/budget/save")
+    public String saveBudget(@ModelAttribute BudgetForm budgetForm) {
+        budgetService.saveBudget(budgetForm);
+        return "redirect:/home"; // 保存後はホームに戻る
+    }
+}

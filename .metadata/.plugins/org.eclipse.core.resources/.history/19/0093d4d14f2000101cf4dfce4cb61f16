@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>ログイン結果</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- 自動リダイレクト設定 -->
+    <meta http-equiv="refresh" th:if="${userLoginForm.check == true}" content="0; URL='/'" />
+</head>
+<body>
+    <div th:if="${userLoginForm.check == false}">
+        <p>メールアドレスまたはパスワードが違います。</p>
+        <a th:href="@{/userRegist}">戻る</a>
+    </div>
+</body>
+</html>

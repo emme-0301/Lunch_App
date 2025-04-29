@@ -1,0 +1,43 @@
+package com.example.demo;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+
+@Controller
+public class userRegistController {
+
+	@Autowired
+	
+	userService service;
+	
+	@GetMapping("/userRegist")
+	public String getRegistPage(Model model){
+		
+		model.addAttribute("userRegistForm", new userRegistForm());
+		
+		return "userRegist";
+		
+	}
+	
+	@PostMapping("/confirm")
+	public String showInfo(@ModelAttribute userRegistForm userRegistForm) {
+		
+		return "confirm";
+		
+	}
+	
+	@PostMapping("/regist")
+	public String regist(@ModelAttribute userRegistForm form) {
+		
+		service.create(form);
+		
+		return "registResult";
+		
+	}
+}

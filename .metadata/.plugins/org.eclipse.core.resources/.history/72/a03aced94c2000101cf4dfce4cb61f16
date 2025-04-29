@@ -1,0 +1,21 @@
+package com.example.demo;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class LunchService {
+
+    private final LunchMenuRepository lunchRepository;
+
+    public LunchService(LunchMenuRepository lunchRepository) {
+        this.lunchRepository = lunchRepository;
+    }
+
+    public void saveLunch(LunchMenu lunch) {
+        lunchRepository.save(lunch);
+    }
+    
+    public List<LunchMenu> findAllLunch() {
+        return lunchRepository.findAll();  // ← これで一覧取れるわよ
+    }
+}

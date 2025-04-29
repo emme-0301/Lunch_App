@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ランチ登録</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>ランチ登録フォーム</h1>
+<form th:action="@{/register}" th:object="${lunch}" method="post">
+    <label>名前：</label>
+    <input type="text" th:field="*{name}" /><br/>
+    <label>金額：</label>
+    <input type="number" th:field="*{price}" /><br/>
+    <label>ジャンル：</label>
+    <input type="text" th:field="*{genre}" /><br/>
+    <button type="submit">登録する</button>
+</form>
+</body>
+</html>
