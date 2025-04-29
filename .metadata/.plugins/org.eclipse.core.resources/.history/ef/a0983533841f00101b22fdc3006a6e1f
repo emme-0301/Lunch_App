@@ -1,0 +1,17 @@
+package com.example.demo;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class LunchService {
+
+    private final LunchRepository lunchRepository;
+
+    public LunchService(LunchRepository lunchRepository) {
+        this.lunchRepository = lunchRepository;
+    }
+
+    public void saveLunch(Lunch lunch) {
+        lunchRepository.save(lunch);
+    }
+}

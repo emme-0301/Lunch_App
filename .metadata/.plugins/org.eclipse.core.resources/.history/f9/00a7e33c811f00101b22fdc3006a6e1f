@@ -1,0 +1,19 @@
+package com.example.demo;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Entity
+@Data
+public class Lunch_MENU {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    private Integer price;
+
+    private String genre;
+}

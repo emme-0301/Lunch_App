@@ -1,0 +1,28 @@
+package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class SpendingService {
+
+	@Autowired
+	SpendingRepository repo;
+	Spending spending;
+	
+	public void addSpending(SpendingForm spendingForm) {
+		
+		Spending spending = new Spending(); 	
+		spending.setUserName(spendingForm.getUserName());
+		spending.setMonth(spendingForm.getMonth());
+		spending.setTotal_spent(spendingForm.getTotal_spent());
+		
+		repo.save(spending);
+	}
+	
+	public List<Spending> getAllSpending(){
+		
+		return SpendingRepository.findAll();
+	}
+	
+}

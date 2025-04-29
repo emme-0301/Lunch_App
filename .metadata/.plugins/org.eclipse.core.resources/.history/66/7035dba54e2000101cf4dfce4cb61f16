@@ -1,0 +1,40 @@
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+
+	@Autowired
+	UserRepository repo;
+	
+	
+	public String create(userRegistForm form) {
+		
+		
+        User user = new User();
+        user.setUserName(form.getUserName());
+        user.setAge(form.getAge());
+        user.setEmail(form.getEmail());
+        user.setPassword(form.getPassword());
+        
+        
+        repo.save(user);
+        
+        return "success!!";
+    }
+	
+	public List<User> login(userLoginForm form) {
+		
+		String email = form.getEmail();
+		String pass =  form.getPassword();
+		
+		List<User> result= repo.findByemailAndPassword(email,pass);
+		
+		return result;
+	}
+	
+}
