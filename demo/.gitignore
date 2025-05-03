@@ -32,3 +32,36 @@ build/
 ### VS Code ###
 .vscode/
 .DS_Store
+
+# Build output
+/bin/
+/build/
+/target/
+
+# Eclipse
+/.project
+/.classpath
+/.settings/
+/.metadata/
+
+# IntelliJ
+.idea/
+/*.iml
+
+# OS
+Thumbs.db
+
+# Logs
+*.log
+
+# Maven
+.mvn/
+!**/src/main/**/.gitkeep
+
+# Gradle
+.gradle/
+build/
+
+# Java
+*.class
+
