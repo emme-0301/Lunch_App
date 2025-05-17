@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,8 +27,9 @@ public class Spending {
 	@Column(name="username")
 	private String userName;
 	
-	@Column(name="month")
-	private Integer month;
+	@Column(name="date")
+	private LocalDate date;
+
 	
 	@Column(name="total_spent")
 	private Integer total_spent;

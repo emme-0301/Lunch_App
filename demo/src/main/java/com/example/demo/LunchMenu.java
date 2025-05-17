@@ -10,7 +10,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Data;
 
 @Entity
@@ -25,7 +27,14 @@ public class LunchMenu {
 
     @Column(name = "MENU_NAME", nullable = false)
     private String menuName;
+    
+    @Lob
+    @Column(name = "IMAGE", columnDefinition = "LONGBLOB")
+    private byte[] image;
 
+    @Column(name = "IMAGE_TYPE")
+    private String imageType;
+    
     @Column(name = "COST")
     private Integer cost;
 
@@ -39,4 +48,15 @@ public class LunchMenu {
     @UpdateTimestamp
     @Column(name = "UPDATE_TSTAMP")
     private LocalDateTime updateTstamp;
+    
+    @Transient // 永続化しないように（DBに保存しない）
+    private String base64Image;
+
+    public String getBase64Image() {
+        return base64Image;
+    }
+
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
+    }
 }

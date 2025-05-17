@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>統計ページ</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<h2>月ごとのランチ費用</h2>
+	<ul>
+		<li th:each="entry : ${monthlyStats}">
+			<span th:text="${entry.key}">年月</span>：<span th:text="${entry.value}">金額</span>円
+		</li>
+	</ul>
+
+	<h2>週ごとのランチ費用</h2>
+	<ul>
+		<li th:each="entry : ${weeklyStats}">
+			第<span th:text="${entry.key}">週</span>：<span th:text="${entry.value}">金額</span>円
+		</li>
+	</ul>
+	<h2>月別支出グラフ</h2>
+	<div style="width: 450px; height: 300px; margin: auto;">
+		<canvas id="spendingChart"></canvas>
+	</div>
+
+
+	<script th:inline="javascript">
+		const labels = /*[[${labels}]]*/[];
+		const data = /*[[${data}]]*/[];
+
+		const ctx = document.getElementById('spendingChart').getContext('2d');
+		const spendingChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: labels,
+				datasets: [{
+					label: '支出金額（円）',
+					data: data,
+					backgroundColor: 'rgba(54, 162, 235, 0.6)',
+					borderColor: 'rgba(54, 162, 235, 1)',
+					borderWidth: 0.5
+				}]
+			},
+			options: {
+				scales: {
+					y: {beginAtZero: true}
+				}
+			}
+		});
+	</script>
+	<a th:href="@{/home}">ホームに戻る</a>
+</body>
+
+</html>

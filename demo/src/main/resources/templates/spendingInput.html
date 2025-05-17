@@ -9,10 +9,10 @@
 
     <form th:action="@{/spending/add}" th:object="${spendingForm}" method="post">
         <label>ユーザー名：</label>
-        <input type="text" th:field="*{userName}" required /><br/>
+		<input type="text" th:field="*{userName}" readonly />
         
-        <label>対象月（例：2025-04）：</label>
-        <input type="text" th:field="*{month}" required /><br/>
+        <label>日付：</label>
+        <input type="date" th:field="*{date}" required /><br/>
 
         <label>支出額（円）：</label>
         <input type="number" th:field="*{total_spent}" required /><br/>

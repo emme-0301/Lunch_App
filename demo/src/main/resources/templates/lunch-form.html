@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>ランチ登録フォーム</title>
-    <meta charset="UTF-8">
+	<title>ランチ登録フォーム</title>
+	<meta charset="UTF-8">
 </head>
+
 <body>
-    <h1>ランチメニュー登録</h1>
-    <form th:action="@{/register}" th:object="${lunchForm}" method="post">
-    <label>メニュー名：</label>
-    <input type="text" th:field="*{menuName}" /><br/>
+	<h1>ランチメニュー登録</h1>
+	<p>ログインユーザー：<span th:text="${loginUser}"></span></p>
+	<form th:action="@{/register}" enctype="multipart/form-data" th:object="${lunchForm}" method="post">
+		<label>メニュー名：</label>
+		<input type="text" th:field="*{menuName}" /><br />
 
-    <label>価格：</label>
-    <input type="number" th:field="*{cost}" /><br/>
+		<label for="image">画像</label>
+		<input type="file" th:field="*{image}"><br>
 
-    <label>カテゴリー：</label>
-    <input type="text" th:field="*{menuCategory}" /><br/>
+		<label>価格：</label>
+		<input type="number" th:field="*{cost}" /><br />
 
-    <button type="submit">登録する</button>
-</form>
+		<label>カテゴリー：</label>
+		<input type="text" th:field="*{menuCategory}" /><br />
+
+		<button type="submit">登録する</button>
+	</form>
 </body>
+
 </html>
