@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Login</h1>
+    <h2>メールアドレスを入力してください。</h2>
+    <form action="#" th:action="@{/login}" th:object="${userLoginForm}" method="post">
+      <p>メールアドレス: <input type="text" th:field="*{email}" /></p>
+      <p>パスワード: <input type="text" th:field="*{password}" /></p>
+      <p><input type="submit" value="Login" /></p>
+    </form>
+</body>
+</html>

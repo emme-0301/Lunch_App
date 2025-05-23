@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>累計支出額確認</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>累計支出額一覧</h1>
+    
+    <table border="1">
+        <tr>
+            <th>月</th>
+            <th>累計支出額（円）</th>
+        </tr>
+        <tr th:each="spending : ${spendingList}">
+            <td th:text="${spending.month}"></td>
+            <td th:text="${spending.total_spent}"></td>
+        </tr>
+    </table>
+
+    <a th:href="@{/home}">ホームに戻る</a>
+</body>
+</html>

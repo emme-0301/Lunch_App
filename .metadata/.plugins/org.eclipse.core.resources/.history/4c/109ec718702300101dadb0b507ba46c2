@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>支出登録</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>支出を追加する</h1>
+
+    <form th:action="@{/spending/add}" th:object="${spendingForm}" method="post">
+        <label>対象月（例：2025-04）：</label>
+        <input type="text" th:field="*{month}" required /><br/>
+
+        <label>支出額（円）：</label>
+        <input type="number" th:field="*{amount}" required /><br/>
+
+        <button type="submit">登録</button>
+    </form>
+
+    <a th:href="@{/home}">ホームに戻る</a>
+</body>
+</html>

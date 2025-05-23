@@ -1,0 +1,37 @@
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Controller
+public class SpendingController {
+
+    @Autowired
+    private SpendingService service;
+
+    @GetMapping("/spending/input")
+    public String showSpendingInputForm(Model model) {
+        model.addAttribute("spendingForm", new SpendingForm());
+        return "spendingInput";
+    }
+
+    @PostMapping("/spending/add")
+    public String addSpending(@ModelAttribute SpendingForm spendingForm) {
+    	service.addSpending(spendingForm);
+        return "redirect:/home"; // 登録後はホームに戻る
+    }
+
+    @GetMapping("/spending/list")
+    public String viewSpendingList(Model model) {
+    	
+    	List<Spending> spentList = service.getAllSpending();
+        model.addAttribute("spendingList", spendingService.getAllSpending());
+        return "viewSpending";
+    }
+}

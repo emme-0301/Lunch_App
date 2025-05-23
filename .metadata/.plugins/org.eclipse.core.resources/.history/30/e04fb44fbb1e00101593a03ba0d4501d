@@ -1,0 +1,51 @@
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.lunchapp.userRegist.UserService;
+import com.lunchapp.userRegist.Users;
+
+@Controller
+public class loginController {
+
+@Autowired
+	
+	UserService service;
+	
+	@GetMapping("/userLogin")
+	public String getLoginPage(Model model){
+		
+		model.addAttribute("userLoginForm", new userLoginForm());
+		
+		return "userLogin";
+		
+	}
+	
+	@PostMapping("/login")
+	public String doLogin(@ModelAttribute userLoginForm userLoginForm) {
+		
+		List<Users> result = service.login(userLoginForm);
+		
+		if(CollectionUtils.isEmpty(result)) {
+			userLoginForm.setCheck(false);
+		}else {
+			userLoginForm.setCheck(true);
+			
+			Users users = result.get(0);
+
+			userLoginForm.setEmail(users.getEmail());
+			userLoginForm.setPassword(users.getPassword());
+		}
+		
+		return "userLoginResult";
+		
+	}
+}

@@ -1,0 +1,29 @@
+package com.example.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Controller
+public class LunchController {
+
+    private final LunchMenuRepository lunchRepository;
+
+    public LunchController(LunchMenuRepository lunchRepository) {
+        this.lunchRepository = lunchRepository;
+    }
+
+    @GetMapping("/lunchRegist")
+    public String showForm(Model model) {
+        model.addAttribute("lunch", new Lunch_MENU());
+        return "lunch-form";
+    }
+
+    @PostMapping("/lunchRegister")
+    public String registerLunch(@ModelAttribute Lunch_MENU lunch) {
+        lunchRepository.save(lunch);
+        return "redirect:/";
+    }
+}

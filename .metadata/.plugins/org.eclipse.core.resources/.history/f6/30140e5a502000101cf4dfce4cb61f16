@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ランチメニュー管理アプリ ホーム</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding-top: 100px;
+            background-color: #fefefe;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 50px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>ようこそ、ランチメニュー管理アプリへ！</h1>
+
+    <div class="button-container">
+        <a th:href="@{/lunchRegist}" class="btn">ランチ登録</a>
+        <a th:href="@{/recommend}" class="btn">おすすめを見る</a>
+        <a th:href="@{/profile}" class="btn">プロフィール</a>
+    </div>
+</body>
+</html>

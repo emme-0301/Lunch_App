@@ -1,0 +1,17 @@
+package com.example.demo;
+
+package com.lunchapp.Login;
+
+import lombok.Data;
+
+@Data
+public class userLoginForm {
+
+		
+	private String email;
+		
+	private String password;
+		
+	private boolean check;
+}
+
