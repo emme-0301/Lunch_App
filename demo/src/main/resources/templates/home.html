@@ -7,7 +7,7 @@
 	<link rel="stylesheet" th:href="@{/css/home.css}" />
 </head>
 
-<body>
+<body>	
 	<h1>ようこそ、ランチメニュー管理アプリへ！</h1>
 
 	<div class="button-container">
@@ -17,10 +17,12 @@
 	</div>
 
 	<div class="centered-section">
-		<button id="recommend-btn" class="btn">おすすめを見る</button>
+		<button id="recommend-btn" class="btn">おすすめを見る</button>		
 	</div>
 	<div id="recommend-result"></div>
-
+	
+		
+	<script th:src="@{/js/recommend.js}"></script>	
 </body>
 
 </html>
