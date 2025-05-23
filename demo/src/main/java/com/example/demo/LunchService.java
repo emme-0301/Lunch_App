@@ -43,8 +43,7 @@ public class LunchService {
         }
         return dtoList;
     }
-
- // LunchService.java
+//レコメンドメニュー表示用
     @Async
     public CompletableFuture<LunchMenu> getRandomLunchAsync() {
         List<LunchMenu> allMenus = lunchRepository.findAll();
