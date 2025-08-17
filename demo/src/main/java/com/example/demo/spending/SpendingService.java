@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.spending;
 
 import java.time.YearMonth;
 import java.time.temporal.ChronoField;

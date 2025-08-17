@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.spending;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,9 +15,9 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="budget")
+@Table(name="spending")
 @Data
-public class Budget {
+public class Spending {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,11 +27,12 @@ public class Budget {
 	@Column(name="username")
 	private String userName;
 	
-	@Column(name="month")
-	private Integer month;
+	@Column(name="date")
+	private LocalDate date;
+
 	
-	@Column(name="amount")
-	private Integer amount;
+	@Column(name="total_spent")
+	private Integer total_spent;
 	
 	@CreationTimestamp
     @Column(name = "created_at", updatable = false)

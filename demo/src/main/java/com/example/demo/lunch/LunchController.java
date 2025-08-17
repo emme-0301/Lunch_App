@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.lunch;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.example.demo.user.User;
 
 import jakarta.servlet.http.HttpSession;
 
