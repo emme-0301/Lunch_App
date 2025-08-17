@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.lunch;
 
 import java.time.LocalDateTime;
 
