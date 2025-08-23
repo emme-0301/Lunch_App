@@ -25,6 +25,9 @@ public class LunchMenu {
     @Column(name = "MENU_ID")
     private Long menuId;
 
+    @Column(name = "user_id", nullable = false)
+    private Integer user_id;
+    
     @Column(name = "MENU_NAME", nullable = false)
     private String menuName;
     
