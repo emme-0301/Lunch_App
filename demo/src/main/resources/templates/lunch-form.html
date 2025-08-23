@@ -8,7 +8,7 @@
 
 <body>
 	<h1>ランチメニュー登録</h1>
-	<p>ログインユーザー：<span th:text="${loginUser}"></span></p>
+	<p>ログインユーザー：<span th:text="${loginUser.userName}"></span></p>
 	<form th:action="@{/register}" enctype="multipart/form-data" th:object="${lunchForm}" method="post">
 		<label>メニュー名：</label>
 		<input type="text" th:field="*{menuName}" /><br />

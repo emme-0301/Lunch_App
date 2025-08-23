@@ -19,45 +19,47 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class LunchController {
 
-	@Autowired
+    @Autowired
+    LunchService service;
 
-	LunchService service;
+    // 💡 全ハンドラメソッドで "loginUser" がModelに入る
+    @ModelAttribute("loginUser")
+    public User setUpLoginUser(HttpSession session) {
+        return (User) session.getAttribute("loginUserInfo");
+    }
 
-	@GetMapping("/lunchRegist")
-	public String showForm(Model model, HttpSession session) {
-		model.addAttribute("lunchForm", new LunchRegistForm());
+    @GetMapping("/lunchRegist")
+    public String showForm(Model model) {
+        model.addAttribute("lunchForm", new LunchRegistForm());
+        return "lunch-form";
+    }
 
-		// セッションからログインユーザー名を取得
-		User loginUser = (User) session.getAttribute("loginUserInfo");
-		model.addAttribute("loginUser", loginUser.getUserName()); // Thymeleafなどで表示用に渡す
+    @GetMapping("/lunchList")
+    public String showLunchList(Model model) {
+        List<LunchMenu> lunchList = service.findAllLunch();
+        List<LunchDto> dtoList = service.convertToDTOList(lunchList);
+        model.addAttribute("lunchList", dtoList);
+        return "lunch-list";
+    }
 
-		return "lunch-form";
-	}
+    @PostMapping("/register")
+    public String registerLunch(
+            @ModelAttribute("lunchForm") LunchRegistForm lunchForm,
+            @RequestParam("image") MultipartFile imageFile,
+            @ModelAttribute("loginUser") User loginUser) throws IOException {
 
-	@GetMapping("/lunchList")
-	public String showLunchList(Model model) {
-	    List<LunchMenu> lunchList = service.findAllLunch();
-	    List<LunchDto> dtoList = service.convertToDTOList(lunchList);
-	    model.addAttribute("lunchList", dtoList);
-	    return "lunch-list";
-	}
+        LunchMenu lunch = new LunchMenu();
+        lunch.setUser_id(loginUser.getId());
+        lunch.setMenuName(lunchForm.getMenuName());
+        lunch.setCost(lunchForm.getCost());
+        lunch.setMenuCategory(lunchForm.getMenuCategory());
 
+        if (!imageFile.isEmpty()) {
+            lunch.setImage(imageFile.getBytes());
+            lunch.setImageType(imageFile.getContentType());
+        }
 
-	@PostMapping("/register")
-	public String registerLunch(@ModelAttribute("lunchForm") LunchRegistForm lunchForm,
-			@RequestParam("image") MultipartFile imageFile) throws IOException {
-		LunchMenu lunch = new LunchMenu();
-		lunch.setMenuName(lunchForm.getMenuName());
-		lunch.setCost(lunchForm.getCost());
-		lunch.setMenuCategory(lunchForm.getMenuCategory());
-
-		if (!imageFile.isEmpty()) {
-			lunch.setImage(imageFile.getBytes()); // バイト配列に変換して保存
-			lunch.setImageType(imageFile.getContentType()); // MIMEタイプをセット
-		}
-
-		service.saveLunch(lunch);
-		return "lunchRegistResult";
-	}
-
+        service.saveLunch(lunch);
+        return "lunchRegistResult";
+    }
 }
