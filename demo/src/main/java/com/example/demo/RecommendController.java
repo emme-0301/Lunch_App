@@ -5,10 +5,14 @@ import java.util.concurrent.CompletableFuture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.lunch.LunchMenu;
 import com.example.demo.lunch.LunchService;
+import com.example.demo.user.User;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 
@@ -17,11 +21,18 @@ public class RecommendController {
 	@Autowired
 	LunchService lunchService;
 	
+	
+	@ModelAttribute("loginUser")
+    public User setUpLoginUser(HttpSession session) {
+        return (User) session.getAttribute("loginUserInfo");
+    }
+	
+	
 	@GetMapping("/recommend")
 	@ResponseBody
-	public CompletableFuture<LunchMenu> recommendLunch() {
+	public CompletableFuture<LunchMenu> recommendLunch(@ModelAttribute("loginUser") User loginUser) {
 		
-	    return lunchService.getRandomLunchAsync(); 
+	    return lunchService.getRandomLunchAsync(loginUser.getId()); 
 	}
 
 }

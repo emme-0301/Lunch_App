@@ -35,8 +35,8 @@ public class LunchController {
     }
 
     @GetMapping("/lunchList")
-    public String showLunchList(Model model) {
-        List<LunchMenu> lunchList = service.findAllLunch();
+    public String showLunchList(Model model,@ModelAttribute("loginUser") User loginUser) {
+        List<LunchMenu> lunchList = service.findAllLunchPerUser(loginUser.getId());
         List<LunchDto> dtoList = service.convertToDTOList(lunchList);
         model.addAttribute("lunchList", dtoList);
         return "lunch-list";
@@ -49,7 +49,7 @@ public class LunchController {
             @ModelAttribute("loginUser") User loginUser) throws IOException {
 
         LunchMenu lunch = new LunchMenu();
-        lunch.setUser_id(loginUser.getId());
+        lunch.setUserId(loginUser.getId());
         lunch.setMenuName(lunchForm.getMenuName());
         lunch.setCost(lunchForm.getCost());
         lunch.setMenuCategory(lunchForm.getMenuCategory());
