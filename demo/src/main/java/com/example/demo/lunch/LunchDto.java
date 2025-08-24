@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class LunchDto {
+	private int user_id;
     private String menuName;
     private int cost;
     private String menuCategory;

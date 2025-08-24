@@ -22,8 +22,8 @@ public class LunchService {
         lunchRepository.save(lunch);
     }
     
-    public List<LunchMenu> findAllLunch() {
-        return lunchRepository.findAll();  
+    public List<LunchMenu> findAllLunchPerUser(int userId) {
+        return lunchRepository.findByUserId(userId);  
     }
     
     public List<LunchDto> convertToDTOList(List<LunchMenu> entityList) {
@@ -45,8 +45,8 @@ public class LunchService {
     }
 //レコメンドメニュー表示用
     @Async
-    public CompletableFuture<LunchMenu> getRandomLunchAsync() {
-        List<LunchMenu> allMenus = lunchRepository.findAll();
+    public CompletableFuture<LunchMenu> getRandomLunchAsync(int userId) {
+        List<LunchMenu> allMenus = lunchRepository.findByUserId(userId);
         LunchMenu selected = allMenus.get(new Random().nextInt(allMenus.size()));
         return CompletableFuture.completedFuture(selected);
     }
